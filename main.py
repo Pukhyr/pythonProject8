@@ -58,6 +58,5 @@ def add_question(message):
 
 
 if __name__=='__main__':
-    createdb()
     print ('Бот запущен')
     bot.infinity_polling()

@@ -1,5 +1,6 @@
 import psycopg2
 
+
 def createdb()-> None:
     conn = psycopg2.connect(
         host='localhost',
@@ -13,8 +14,7 @@ def createdb()-> None:
 
 CREATE TABLE question (
     id BIGSERIAL PRIMARY KEY,
-    question_text VARCHAR(255) NOT NULL,
-    publish_date TIMESTAMP NOT NULL
+    question_text VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE choice (
@@ -50,7 +50,7 @@ def get_user_stat():
     conn.close()
     return str(all_records)
 
-def save_question(question_text:str):
+def save_question(question_text:str ):
     conn = psycopg2.connect(
         host='localhost',
         port=5432,
@@ -59,7 +59,7 @@ def save_question(question_text:str):
         dbname='finalproject'
     )
     with conn.cursor() as cursor:
-        cursor.execute(""""INSERT INTO question VALUES (%s) """, (question_text, ))
+        cursor.execute(""""INSERT INTO question VALUES (%s)""", (question_text, ))
         conn.commit()
         conn.close()
 
@@ -67,4 +67,3 @@ def save_question(question_text:str):
 
 if __name__=='__main__':
     save_question('eubwdh?')
-    createdb()
